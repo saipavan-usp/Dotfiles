@@ -1,0 +1,11 @@
+Command '['xprop', '-id', '16780674', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '20995949', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '10512499', 'WM_CLASS']' returned non-zero exit status 1.
+'NoneType' object is not subscriptable
+Command '['xprop', '-id', '41985584', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '10505486', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '25186930', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '65011713', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '27293420', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '48234497', 'WM_CLASS']' returned non-zero exit status 1.
+Command '['xprop', '-id', '50334824', 'WM_CLASS']' returned non-zero exit status 1.
