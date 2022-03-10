@@ -1,0 +1,9 @@
+#!/bin/bash
+
+CONF_DIR="~/.config"
+BIN_DIR="/usr/bin"
+
+copy_scripts (){
+    cp -fv "$CONF_DIR/polybar/qtile-polybar" "$BIN_DIR"
+    cp -fv "$CONF_DIR/eww/launch-eww" "$BIN_DIR"
+}
