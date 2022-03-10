@@ -1,0 +1,23 @@
+KEYBOARD_NAME="AT Translated Set 2 keyboard"
+STATUS=`xinput list-props "AT Translated Set 2 keyboard" | grep "Device Enabled" | awk '{ print $4 }'`
+
+function Enable {
+    xinput enable "$KEYBOARD_NAME" && xinput set-prop "$KEYBOARD_NAME" "Device Enabled" 1
+    STATUS=1
+}
+
+function Disable {
+    xinput disable "$KEYBOARD_NAME" && xinput set-prop "$KEYBOARD_NAME" "Device Enabled" 0
+    STATUS=0
+}
+
+
+[[ $STATUS -eq 1 ]] && echo "On" || echo "Off"
+
+if [[ $1 == "toggle" ]]; then
+    if [[ $STATUS -eq 1 ]]; then
+        Disable
+    else
+        Enable
+    fi
+fi

@@ -1,0 +1,9 @@
+#!/bin/bash
+xrdb -query -all > ~/.Xresources;
+[ -f "$HOME/.cache/wal/colors.sh" ] && source "$HOME/.cache/wal/colors.sh";
+source ~/.zshrc;
+pywalfox update;
+# Dunst
+ln -sf "${HOME}/.cache/wal/dunstrc" "${HOME}/.config/dunst/dunstrc" 
+pkill dunst
+dunst &

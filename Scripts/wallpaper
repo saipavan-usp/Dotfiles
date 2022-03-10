@@ -1,0 +1,2 @@
+WALL=$(ls -t ~/Walls | grep 'jpg\|png\|jpeg' | rofi -dmenu -p "Select Wallpaper: ")
+feh --bg-fill ~/Walls/$WALL

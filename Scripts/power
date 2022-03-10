@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+export XAUTHORITY=/home/pa1/.Xauthority
+export DISPLAY=:0
+export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/1000/bus"
+
+# /usr/bin/notify-send -i /usr/share/icons/Papirus-Dark/48x48/status/battery-good-charging.svg 'Battery' '\n\nCharging'
+
+
+function on {
+    /usr/bin/notify-send -i /usr/share/icons/Papirus-Dark/48x48/status/battery-good-charging.svg 'Battery' '\n\nCharging.'
+}
+
+function off {
+    /usr/bin/notify-send -i /usr/share/icons/Papirus-Dark/48x48/status/battery-good.svg 'Battery' '\n\nDischarging.'
+}
+
+function at20 {
+    /usr/bin/notify-send -i /usr/share/icons/Papirus-Dark/48x48/status/battery-caution.svg 'Battery' "\n\nI'm gonna die. Plug me in."
+}
+
+function at80 {
+    /usr/bin/notify-send -i /usr/share/icons/Papirus-Dark/48x48/status/battery-full.svg 'Battery' "\n\nI'm good. You can unplug me now."
+}
+
+$1

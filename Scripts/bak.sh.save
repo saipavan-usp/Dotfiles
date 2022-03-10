@@ -1,0 +1,52 @@
+[[ -d ~/Configs ]] || mkdir -p ~/Configs/.config
+
+# Directories
+cp -rf ~/Scripts ~/Configs/ && echo "Copied Scripts Folder"
+cp -rf ~/.fonts ~/Configs/ && echo "Copied .fonts Folder"
+cp -rf ~/.config/i3 ~/Configs/.config/ && echo "Copied i3 Folder"
+cp -rf ~/.config/dunst ~/Configs/.config/ && echo "Copied dunst Folder"
+cp -rf ~/.config/polybar ~/Configs/.config/ && echo "Copied polybar Folder"
+cp -rf ~/.config/kitty ~/Configs/.config/ && echo "Copied kitty Folder"
+cp -rf ~/.config/rofi ~/Configs/.config/ && echo "Copied rofi Folder"
+cp -rf ~/.config/wal ~/Configs/.config/ && echo "Copied wal Folder"
+cp -rf ~/.config/yay ~/Configs/.config/ && echo "Copied yay Folder"
+cp -rf ~/.oh-my-zsh ~/Configs/ && echo "Copied .oh-my-zsh Folder"
+cp -rf ~/.config/qtile ~/Configs && echo "Copied Qtile Folder"
+
+# Files
+cp -f ~/.config/picom.conf ~/Configs/.config/ && echo "Copied picom.conf File"
+cp -f ~/.p10k.zsh ~/Configs/ && echo "Copied .p10k.zsh File"
+cp -f ~/.zshrc ~/Configs/ && echo "Copied .zshrc File"
+cp -f ~/.Xresources ~/Configs && echo "Copied .Xresources File"
+
+cd ~/Configs
+
+if ! [ -d .git ]; then
+    git init
+    git add .
+    git commit -m "First Commit"
+    git branch -M main
+    git remote add origin https://github.com/saipavan-usp/DotfilesV2.git
+    git push -u origin main
+else
+    git add .
+    git commit -m "First Commit"
+    git branch -M main
+    git remote add origin https://github.com/saipavan-usp/DotfilesV2.git
+    git branch -M main
+    git push -u origin main
+fi
+
+# For Brightness
+# sudo useradd -aG video $LOGNAME
+# sudo chgrp video /sys/class/backlight/intel_backlight/brightness
+# sudo chmod g+rw /sys/class/backlight/intel_backlight/brightness
+
+# For Dunst Pywal
+# ln -sf $HOME/.cache/wal/dunstrc $HOME/.config/dunst/
+
+# Packages :
+# i3 polybar rofi networkmanager_dmenu kitty htop dunst picom-jonaburg-git pywal
+
+# PIP Packages :
+# pywalfox

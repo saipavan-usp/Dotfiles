@@ -1,0 +1,50 @@
+#!/bin/bash
+
+ACT_MONITORS=1
+
+function SingleHDMI1 {
+	echo "Switching to HDMI1"
+	xrandr --output LVDS-1 --off --output HDMI-1 --auto
+	xrandr --output HDMI-1 --mode 1366x768
+}
+
+function SingleLVDS1 {
+	echo "Switching to LVDS-1"
+        xrandr --output HDMI-1 --off --output LVDS-1 --auto
+}
+
+function DualMonitor {
+	echo "Activating both Monitors"
+	xrandr --output HDMI-1 --auto --same-as LVDS-1
+	xrandr --output HDMI-1 --mode 1366x768
+}
+
+function ActiveMonitors {
+	ACT_MONITORS=`xrandr --listactivemonitors | cut -d " " -f 2 | head -n1`
+}
+
+function HDMI1toLVDS1 {
+	xrandr --output LVDS-1 --auto --right-of HDMI-1
+	xrandr --output HDMI-1 --mode 1366x768
+}
+
+function LVDS1toHDMI1 {
+	xrandr --output HDMI-1 --auto --right-of LVDS-1
+	xrandr --output HDMI-1 --mode 1366x768
+}
+
+cat << EOF
+1. SingleLVDS1
+2. SingleHDMI1
+3. DualMonitor
+4. HDMI1toLVDS1
+5. LVDS1toHDMI1
+EOF
+
+case $1 in
+1) SingleLVDS1;;
+2) SingleHDMI1;;
+3) DualMonitor;;
+4) HDMI1toLVDS1;;
+5) LVDS1toHDMI1;;
+esac

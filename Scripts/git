@@ -1,0 +1,14 @@
+cd $HOME/.config
+cp -rv i3 rofi polybar terminator gtk-2.0 gtk-3.0 picom.conf /run/media/PAWAN/dotfiles/.config
+cd ..
+cp -rv .xinitrc .fonts /run/media/PAWAN/dotfiles
+cp /etc/lightdm/lightdm.conf /run/media/PAWAN/dotfiles/root/etc/lightdm/
+cd /run/media/PAWAN/dotfiles
+
+echo "# Dotfiles" > README.md
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/saipavan-usp/Dotfiles.git
+git push -u origin main

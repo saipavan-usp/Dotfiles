@@ -1,0 +1,2 @@
+XBG=$(cat .Xresources | grep "color0" | head -n1 | column -t | cut -d " " -f 3 | sed 's/#//g')
+export XBG="#B3$XBG"

@@ -1,0 +1,8 @@
+if [[ $REDSHIFT_VALUE -eq 0 ]]
+then
+	redshift -O 4500
+	REDSHIFT_VALUE=4500
+else
+	redshift -x
+	REDSHIFT_VALUE=0
+fi

@@ -1,0 +1,45 @@
+[[ -d ~/Configs ]] || mkdir -p ~/Configs/.config
+
+# Directories
+cd ~/.config
+cp -rfv  i3 bspwm polybar kitty rofi wal yay qtile dunst sxhkd picom.conf ~/Configs/.config
+
+cp -rfv ~/Scripts ~/Configs/ && echo "Copied Scripts Folder"
+cp -rfv ~/.fonts ~/Configs/ && echo "Copied .fonts Folder"
+cp -rfv ~/.oh-my-zsh ~/Configs/ && echo "Copied .oh-my-zsh Folder"
+
+
+cd ~
+cp .p10k.zsh .zshrc .Xresources ~/Configs/
+
+cd ~/Configs
+
+if ! [ -d .git ]; then
+    git init
+    git add .
+    git commit -m "First Commit"
+    git branch -M main
+    git remote add origin https://github.com/saipavan-usp/DotfilesV2.git
+    git push -u --force origin main
+else
+    git add .
+    git commit -m "First Commit"
+    git branch -M main
+    git remote add origin https://github.com/saipavan-usp/DotfilesV2.git
+    git branch -M main
+    git push --force -u origin main
+fi
+
+# For Brightness
+# sudo useradd -aG video $LOGNAME
+# sudo chgrp video /sys/class/backlight/intel_backlight/brightness
+# sudo chmod g+rw /sys/class/backlight/intel_backlight/brightness
+
+# For Dunst Pywal
+# ln -sf $HOME/.cache/wal/dunstrc $HOME/.config/dunst/
+
+# Packages :
+# i3 polybar rofi networkmanager_dmenu kitty htop dunst picom-jonaburg-git pywal
+
+# PIP Packages :
+# pywalfox

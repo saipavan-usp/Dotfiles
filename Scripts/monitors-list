@@ -1,0 +1,33 @@
+NOMONITORS=$(xrandr --listactivemonitors | grep -c 'HDMI\|LVDS')
+ACTIVEMONITOR=$(xrandr --listactivemonitors | grep 'HDMI\|LVDS' | cut -d ' ' -f 6)
+HDMI=`xrandr -q | grep HDMI | cut -d " " -f 1`
+LVDS=`xrandr -q | grep LVDS | cut -d " " -f 1`
+
+function LVDS {
+    notify-send "Activating LVDS"
+    xrandr --output $HDMI --off --output $LVDS --auto
+}
+
+function HDMI {
+    notify-send "Activating HDMI"
+    xrandr --output $LVDS --off --output $HDMI --mode 1366x768
+}
+
+function DualMonitor {
+    notify-send "Activating Dual Monitors"
+    if [ $NOMONITORS -eq 1 ]; then
+        if [[ $ACTIVEMONITOR = $HDMI ]]; then
+        	xrandr --output $LVDS --auto --same-as $HDMI
+        else
+            xrandr --output $HDMI --mode 1366x768 --same-as $LVDS
+        fi
+    fi
+}
+
+SELECTED=$(echo "1. LVDS
+2. HDMI
+3. DualMonitor" | rofi -dmenu)
+
+SELECTED=`echo $SELECTED | cut -d " " -f 2`
+
+$SELECTED

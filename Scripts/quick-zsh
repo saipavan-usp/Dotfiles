@@ -1,0 +1,61 @@
+packages=("curl" "wget" "git" "zsh")
+plugins=("zsh-autosuggestions" "zsh-syntax-highlighting" "zsh-completions" "zsh-history-substring-search")
+
+# if zsh already installed taking zsh backup
+if [ -f $HOME/.zshrc ]; then
+    mv $HOME/.zshrc $HOME/.zshrc.old
+fi
+
+# install required packages
+echo "Installing Required Packages ${packages[@]}"
+sudo pacman -Syu --needed ${packages[@]}
+
+# installing oh-my-zsh
+if [ -d ~/.oh-my-zsh ]; then
+    echo "oh-my-zsh already installed"
+else
+    echo "Installing Oh-My-Zsh"
+    git clone --depth=1 git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+fi
+
+# installing pulgins
+for plugin in ${plugins[@]}; do
+    echo $plugin
+    if [ -d ~/.oh-my-zsh/custom/plugins/$plugin ]; then
+        cd ~/.oh-my-zsh/custom/plugins/$plugin && git pull
+    else
+        echo "Installing $plugin plugin"
+        git clone --depth=1 https://github.com/zsh-users/$plugin ~/.oh-my-zsh/custom/plugins/$plugin
+    fi
+done
+
+# installing p10k theme
+if [ -d ~/.oh-my-zsh/custom/themes/powerlevel10k ]; then
+    cd ~/.oh-my-zsh/custom/themes/powerlevel10k && git pull
+else
+    echo -e "Installing Powerlevel10k theme"
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/custom/themes/powerlevel10k
+fi
+
+
+# modifying .zshrc
+cp -f ~/.zshrc.bak ~/.zshrc
+echo -e "Changing plugins in .zshrc\n"
+sed -i "s/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-completions zsh-history-substring-search)/w /dev/stdout" ~/.zshrc
+echo -e "Changing theme in .zshrc\n"
+sed -i 's#ZSH_THEME="robbyrussell"#ZSH_THEME="powerlevel10k/powerlevel10k"#w /dev/stdout' ~/.zshrc
+
+# recommende fonts for p10k theme
+wget -q --show-progress -N https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/Hack/Regular/complete/Hack%20Regular%20Nerd%20Font%20Complete.ttf -P ~/.fonts/
+wget -q --show-progress -N https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/RobotoMono/Regular/complete/Roboto%20Mono%20Nerd%20Font%20Complete.ttf -P ~/.fonts/
+wget -q --show-progress -N https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete.ttf -P ~/.fonts/
+wget -q --show-progress -N https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf -P ~/.fonts
+wget -q --show-progress -N https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf -P ~/.fonts
+wget -q --show-progress -N https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf -P ~/.fonts
+wget -q --show-progress -N https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf -P ~/.fonts
+fc-cache -fv ~/.fonts
+
+# changing shell
+echo -e "\nSudo access is needed to change default shell\n"
+chsh -s $(which zsh)
+echo "Restart the terminal"

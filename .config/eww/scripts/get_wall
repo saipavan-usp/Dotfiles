@@ -1,0 +1,5 @@
+#!/bin/bash
+
+
+WALL=$(cat ~/.fehbg | tail -n 1 | cut -d ' ' -f 4)
+echo "$WALL"

@@ -1,0 +1,28 @@
+SELECTED=$(echo "1. Analog
+2. Analog + Mic
+3. HDMI
+4. HDMI + Mic" | rofi -dmenu)
+
+SELECTED=$(echo $SELECTED | cut -d " " -f 1 | tr -d ".")
+
+setProfile() {
+	pactl set-card-profile 0 $1
+}
+
+case $SELECTED in
+	1)
+		notify-send "Audio: Analog";
+		setProfile output:analog-stereo;;
+	2)
+		notify-send "Audio: Analog + Mic";
+		setProfile output:analog-stereo+input:analog-stereo;;
+	3)
+		notify-send "Audio: HDMI";
+		setProfile output:hdmi-stereo;;
+	4)
+		notify-send "Audio: HDMI + Mic";
+		setProfile output:hdmi-stereo+input:analog-stereo;;
+	*)
+		notify-send "Audio: Analog";
+		setProfile output:analog-stereo;;
+esac
